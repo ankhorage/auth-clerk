@@ -2,4 +2,4 @@
 '@ankhorage/auth-clerk': minor
 ---
 
-Add a framework-neutral Clerk adapter for the Ankhorage authentication port.
+Add a framework-neutral Clerk transport adapter for the Ankhorage authentication port.

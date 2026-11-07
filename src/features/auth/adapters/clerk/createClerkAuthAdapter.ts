@@ -6,19 +6,14 @@ import type {
   AuthResult,
   AuthSession,
 } from '@ankhorage/contracts/auth';
-import { verifyToken } from '@clerk/backend';
 
 import type { ClerkAuthConfig } from '../../../../types/clerk.js';
+import { createClerkJwtVerifier } from './createClerkJwtVerifier.js';
 
-interface AuthorizationAttempt {
-  provider: string;
-  redirectUri: string;
-  state: string;
-}
+const DEFAULT_AUTHORIZATION_ATTEMPT_TTL_MS = 10 * 60 * 1000;
 
 /*** Create a framework-neutral Clerk implementation of the Ankhorage authentication port. */
 export function createClerkAuthAdapter(config: ClerkAuthConfig): AuthPort {
-  const attempts = new Map<string, AuthorizationAttempt>();
   const verifySession = createSessionVerifier(config);
   return {
     signIn: (input) => config.transport.signIn(input),
@@ -30,8 +25,8 @@ export function createClerkAuthAdapter(config: ClerkAuthConfig): AuthPort {
     requestPasswordReset: (input) => config.transport.requestPasswordReset(input),
     verifyOtp: async (input) =>
       verifyResult(await config.transport.verifyOtp(input), verifySession),
-    startAuthorization: async (input) => startAuthorization(config, attempts, input),
-    completeAuthorization: async (input) => completeAuthorization(config, attempts, input),
+    startAuthorization: async (input) => startAuthorization(config, input),
+    completeAuthorization: async (input) => completeAuthorization(config, input),
   };
 }
 
@@ -39,7 +34,7 @@ export function createClerkAuthAdapter(config: ClerkAuthConfig): AuthPort {
 function createSessionVerifier(config: ClerkAuthConfig) {
   return async <T extends AuthSession | null>(session: T): Promise<T> => {
     if (session === null) return session;
-    await (config.verifyJwt ?? createClerkJwtVerifier(config))({
+    await (config.verifyJwt ?? createClerkJwtVerifier())({
       token: session.accessToken,
       issuer: config.public.issuer,
       audience: config.public.audience,
@@ -57,54 +52,65 @@ async function verifyResult<T extends AuthSession | null>(
   if (!result.ok || result.data === undefined) return result;
   try {
     return { ok: true, data: await verifySession(result.data) };
-  } catch (cause) {
-    return providerError<T>('invalid_session', 'Clerk rejected the session token.', cause);
+  } catch {
+    return providerError<T>('invalid_session', 'Clerk rejected the session token.');
   }
 }
 
 /*** Start a single-use Clerk authorization-code attempt with an unguessable state value. */
 async function startAuthorization(
   config: ClerkAuthConfig,
-  attempts: Map<string, AuthorizationAttempt>,
   input: Parameters<AuthPort['startAuthorization']>[0],
 ): Promise<AuthOAuthStartResult> {
   const attemptId = (config.createAttemptId ?? crypto.randomUUID)();
   const state = (config.createState ?? crypto.randomUUID)();
   try {
     const result = await config.transport.startAuthorization({ ...input, state });
-    attempts.set(attemptId, { provider: input.provider, redirectUri: input.redirectUri, state });
+    const now = getNow(config);
+    await config.authorizationAttempts.purgeExpired(now);
+    await config.authorizationAttempts.create({
+      attemptId,
+      provider: input.provider,
+      redirectUri: input.redirectUri,
+      state,
+      expiresAt: now + (config.authorizationAttemptTtlMs ?? DEFAULT_AUTHORIZATION_ATTEMPT_TTL_MS),
+    });
     return {
       ok: true,
       data: { attemptId, provider: input.provider, redirectUri: input.redirectUri, ...result },
     };
-  } catch (cause) {
-    return oauthStartError(input.provider, cause);
+  } catch {
+    return oauthStartError(input.provider);
   }
 }
 
 /*** Complete one Clerk code flow, rejecting missing, replayed, malformed, and mismatched callbacks. */
 async function completeAuthorization(
   config: ClerkAuthConfig,
-  attempts: Map<string, AuthorizationAttempt>,
   input: Parameters<AuthPort['completeAuthorization']>[0],
 ): Promise<AuthOAuthCompletionResult> {
+  const attempt = await consumeAuthorizationAttempt(config, input.attemptId);
+  if (attempt === null) return oauthCompletionError('authorization_attempt_not_found', 'callback');
   if (input.response.type === 'cancelled') {
-    return { ok: false, status: 'cancelled', provider: '', reason: input.response.reason };
+    return {
+      ok: false,
+      status: 'cancelled',
+      provider: attempt.provider,
+      reason: input.response.reason,
+    };
   }
   if (input.response.type === 'error') {
-    return oauthCompletionError('provider_error', 'transport', undefined, input.response.error);
+    return oauthCompletionError('provider_error', 'transport', attempt.provider);
   }
-  const attempt = attempts.get(input.attemptId);
-  if (attempt === undefined)
-    return oauthCompletionError('authorization_attempt_not_found', 'callback');
-  attempts.delete(input.attemptId);
   const callback = parseCallback(input.response.url);
   if (callback === null)
+    return oauthCompletionError('invalid_callback', 'callback', attempt.provider);
+  if (!hasExpectedRedirectUri(callback.url, attempt.redirectUri))
     return oauthCompletionError('invalid_callback', 'callback', attempt.provider);
   if (callback.state !== attempt.state)
     return oauthCompletionError('state_mismatch', 'callback', attempt.provider);
   if (callback.error !== undefined)
-    return oauthCompletionError('provider_error', 'callback', attempt.provider, callback.error);
+    return oauthCompletionError('provider_error', 'callback', attempt.provider);
   if (callback.code === undefined)
     return oauthCompletionError('invalid_callback', 'callback', attempt.provider);
   try {
@@ -115,16 +121,18 @@ async function completeAuthorization(
     });
     const verified = await createSessionVerifier(config)(session);
     return { ok: true, status: 'authenticated', provider: attempt.provider, session: verified };
-  } catch (cause) {
-    return oauthCompletionError('code_exchange_failed', 'exchange', attempt.provider, cause);
+  } catch {
+    return oauthCompletionError('code_exchange_failed', 'exchange', attempt.provider);
   }
 }
 
 /*** Read only the standardized callback parameters from an authorization redirect. */
 function parseCallback(url: string) {
   try {
-    const params = new URL(url).searchParams;
+    const callback = new URL(url);
+    const params = callback.searchParams;
     return {
+      url: callback,
       state: params.get('state'),
       code: params.get('code') ?? undefined,
       error: params.get('error') ?? undefined,
@@ -134,14 +142,38 @@ function parseCallback(url: string) {
   }
 }
 
+/*** Require the callback to return to the redirect URI that started this authorization attempt. */
+function hasExpectedRedirectUri(callback: URL, redirectUri: string): boolean {
+  try {
+    const expected = new URL(redirectUri);
+    return callback.origin === expected.origin && callback.pathname === expected.pathname;
+  } catch {
+    return false;
+  }
+}
+
+/*** Atomically consume an unexpired OAuth attempt while keeping store failures unobservable. */
+async function consumeAuthorizationAttempt(config: ClerkAuthConfig, attemptId: string) {
+  try {
+    return await config.authorizationAttempts.consume(attemptId, getNow(config));
+  } catch {
+    return null;
+  }
+}
+
+/*** Obtain the adapter clock so expiry decisions stay deterministic in tests and explicit in hosts. */
+function getNow(config: ClerkAuthConfig): number {
+  return (config.now ?? Date.now)();
+}
+
 /*** Normalize Clerk operation failures into the released Ankhorage result shape. */
-function providerError<T>(code: string, message: string, cause: unknown): AuthResult<T> {
-  return { ok: false, error: { code, message, cause } };
+function providerError<T>(code: string, message: string): AuthResult<T> {
+  return { ok: false, error: { code, message } };
 }
 
 /*** Produce a released OAuth-start error without exposing sensitive callback data. */
-function oauthStartError(provider: string, cause: unknown): AuthOAuthStartResult {
-  return { ok: false, error: oauthError('authorization_failed', 'start', provider, cause) };
+function oauthStartError(provider: string): AuthOAuthStartResult {
+  return { ok: false, error: oauthError('authorization_failed', 'start', provider) };
 }
 
 /*** Produce a released OAuth completion failure without exposing sensitive callback data. */
@@ -154,9 +186,8 @@ function oauthCompletionError(
     | 'state_mismatch',
   stage: 'callback' | 'exchange' | 'transport',
   provider?: string,
-  cause?: unknown,
 ): AuthOAuthCompletionResult {
-  return { ok: false, status: 'error', error: oauthError(code, stage, provider, cause) };
+  return { ok: false, status: 'error', error: oauthError(code, stage, provider) };
 }
 
 /*** Construct a released OAuth error without including raw provider payloads. */
@@ -164,7 +195,6 @@ function oauthError(
   code: AuthOAuthError['code'],
   stage: AuthOAuthError['stage'],
   provider?: string,
-  cause?: unknown,
 ): AuthOAuthError {
   return {
     code,
@@ -172,22 +202,5 @@ function oauthError(
     recoverable: false,
     message: 'Clerk authorization failed.',
     provider,
-    cause,
   };
-}
-
-/*** Verify Clerk-issued JWTs through the supported backend SDK verification surface. */
-function createClerkJwtVerifier(config: ClerkAuthConfig) {
-  return async ({
-    token,
-    issuer,
-    audience,
-  }: Parameters<NonNullable<ClerkAuthConfig['verifyJwt']>>[0]) =>
-    verifyToken(token, {
-      secretKey: config.secretKey,
-      ...(issuer === undefined ? {} : { issuer }),
-      ...(audience === undefined
-        ? {}
-        : { audience: [...(typeof audience === 'string' ? [audience] : audience)] }),
-    });
 }

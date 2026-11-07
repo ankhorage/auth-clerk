@@ -2,7 +2,7 @@
   "name": "@ankhorage/auth-clerk",
   "type": "module",
   "version": "0.1.0",
-  "description": "Clerk adapter implementing the provider-neutral Ankhorage auth port.",
+  "description": "Clerk transport adapter implementing the provider-neutral Ankhorage auth port.",
   "homepage": "https://github.com/ankhorage/auth-clerk#readme",
   "bugs": {
     "url": "https://github.com/ankhorage/auth-clerk/issues"

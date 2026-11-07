@@ -16,7 +16,7 @@ export interface ClerkPublicConfig {
   audience?: string | readonly string[];
 }
 
-/*** The server-side Clerk operations used by the adapter. Secrets remain inside this boundary. */
+/*** Map the host application's Clerk operations into the provider-neutral auth port. */
 export interface ClerkTransport {
   signIn(input: SignInInput): Promise<AuthResult<AuthSession>>;
   signUp(input: SignUpInput): Promise<AuthResult<AuthSession | AuthUser>>;
@@ -32,8 +32,13 @@ export interface ClerkTransport {
 /*** Verify a token using the Clerk JWKS supplied by the adapter configuration. */
 export type ClerkJwtVerifier = (input: ClerkJwtVerificationInput) => Promise<void>;
 
+/*** Represent a Clerk JWKS key, including the identifier used to select it for a JWT. */
+export interface ClerkJwk extends JsonWebKey {
+  kid?: string;
+}
+
 export interface ClerkJwksResolver {
-  getJwks(): Promise<{ keys: readonly JsonWebKey[] }>;
+  getJwks(): Promise<{ keys: readonly ClerkJwk[] }>;
 }
 
 export interface ClerkJwtVerificationInput {
@@ -41,6 +46,22 @@ export interface ClerkJwtVerificationInput {
   issuer?: string;
   audience?: string | readonly string[];
   jwks: ClerkJwksResolver;
+}
+
+/*** Persist one OAuth attempt and atomically retire it before any callback is processed. */
+export interface ClerkAuthorizationAttemptStore {
+  create(attempt: ClerkAuthorizationAttempt): Promise<void>;
+  consume(attemptId: string, now: number): Promise<ClerkAuthorizationAttempt | null>;
+  purgeExpired(now: number): Promise<void>;
+}
+
+/*** Define the durable, short-lived state needed to bind an OAuth callback to its authorization. */
+export interface ClerkAuthorizationAttempt {
+  attemptId: string;
+  provider: string;
+  redirectUri: string;
+  state: string;
+  expiresAt: number;
 }
 
 export interface ClerkAuthorizationStartInput {
@@ -61,13 +82,15 @@ export interface ClerkAuthorizationCodeInput {
   code: string;
 }
 
-/*** Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client. */
+/*** Configure a Clerk transport adapter with durable OAuth state and JWT verification boundaries. */
 export interface ClerkAuthConfig {
   public: ClerkPublicConfig;
-  secretKey: string;
   transport: ClerkTransport;
   verifyJwt?: ClerkJwtVerifier;
   jwks: ClerkJwksResolver;
+  authorizationAttempts: ClerkAuthorizationAttemptStore;
+  authorizationAttemptTtlMs?: number;
   createAttemptId?: () => string;
   createState?: () => string;
+  now?: () => number;
 }
