@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_createClerkAuthAdapter as createClerkAuthAdapter
+  participant participant_createSessionVerifier as createSessionVerifier
+  participant_createClerkAuthAdapter->>participant_createSessionVerifier: createSessionVerifier()
+  participant_createSessionVerifier-->>participant_createClerkAuthAdapter: return

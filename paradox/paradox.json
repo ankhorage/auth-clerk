@@ -1,0 +1,1028 @@
+{
+  "packageName": "CLERK AUTH",
+  "packageId": "@ankhorage/auth-clerk",
+  "description": "Clerk adapter implementing the provider-neutral Ankhorage auth port.",
+  "collaborators": null,
+  "donation": null,
+  "badges": [
+    {
+      "id": "license",
+      "label": "license",
+      "value": "MIT",
+      "color": "2563eb"
+    },
+    {
+      "id": "npm",
+      "label": "npm",
+      "value": "v0.1.0",
+      "color": "cb3837"
+    },
+    {
+      "id": "runtime",
+      "label": "runtime",
+      "value": "bun",
+      "color": "f59e0b"
+    },
+    {
+      "id": "typescript",
+      "label": "typescript",
+      "value": "strict",
+      "color": "2563eb"
+    },
+    {
+      "id": "eslint",
+      "label": "eslint",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "prettier",
+      "label": "prettier",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "build",
+      "label": "build",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "tests",
+      "label": "tests",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "docs",
+      "label": "paradox",
+      "value": "canonical",
+      "color": "0a7f3f"
+    }
+  ],
+  "usage": {
+    "packageName": "@ankhorage/auth-clerk",
+    "command": "ankh auth-clerk --help"
+  },
+  "usageEntries": [],
+  "exampleCount": 0,
+  "findings": [],
+  "config": null,
+  "entrypoints": [
+    "src/index.ts"
+  ],
+  "modules": [
+    {
+      "path": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/clerk.ts"
+      ],
+      "exports": [
+        "createClerkAuthAdapter"
+      ]
+    },
+    {
+      "path": "src/index.ts",
+      "isEntrypoint": true,
+      "dependencies": [],
+      "exports": [
+        "ClerkAuthConfig",
+        "ClerkAuthorizationCodeInput",
+        "ClerkAuthorizationStartInput",
+        "ClerkAuthorizationStartResult",
+        "ClerkJwksResolver",
+        "ClerkJwtVerificationInput",
+        "ClerkJwtVerifier",
+        "ClerkPublicConfig",
+        "ClerkTransport",
+        "createClerkAuthAdapter"
+      ]
+    },
+    {
+      "path": "src/types/clerk.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "ClerkAuthConfig",
+        "ClerkAuthorizationCodeInput",
+        "ClerkAuthorizationStartInput",
+        "ClerkAuthorizationStartResult",
+        "ClerkJwksResolver",
+        "ClerkJwtVerificationInput",
+        "ClerkJwtVerifier",
+        "ClerkPublicConfig",
+        "ClerkTransport"
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "name": "ClerkAuthConfig",
+      "title": null,
+      "description": "Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 65,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "ClerkJwksResolver",
+        "ClerkJwtVerifier",
+        "ClerkPublicConfig",
+        "ClerkTransport"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "createAttemptId",
+          "kind": "property",
+          "type": "(() => string) | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "createState",
+          "kind": "property",
+          "type": "(() => string) | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "jwks",
+          "kind": "property",
+          "type": "ClerkJwksResolver",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "public",
+          "kind": "property",
+          "type": "ClerkPublicConfig",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "secretKey",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "transport",
+          "kind": "property",
+          "type": "ClerkTransport",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "verifyJwt",
+          "kind": "property",
+          "type": "ClerkJwtVerifier | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkAuthorizationCodeInput",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 58,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "code",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "provider",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "redirectUri",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkAuthorizationStartInput",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 46,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "provider",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "queryParams",
+          "kind": "property",
+          "type": "Record<string, string> | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "redirectUri",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "scopes",
+          "kind": "property",
+          "type": "readonly string[] | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "state",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkAuthorizationStartResult",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 54,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "authorizationUrl",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkJwksResolver",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 35,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "getJwks",
+          "kind": "method",
+          "type": "() => Promise<{ keys: readonly JsonWebKey[]; }>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkJwtVerificationInput",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 39,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "ClerkJwksResolver"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "audience",
+          "kind": "property",
+          "type": "string | readonly string[] | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "issuer",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "jwks",
+          "kind": "property",
+          "type": "ClerkJwksResolver",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "token",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkJwtVerifier",
+      "title": null,
+      "description": "Verify a token using the Clerk JWKS supplied by the adapter configuration.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 33,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkPublicConfig",
+      "title": null,
+      "description": "Public, serializable Clerk configuration safe to share with a client application.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 13,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "audience",
+          "kind": "property",
+          "type": "string | readonly string[] | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "issuer",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "publishableKey",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "ClerkTransport",
+      "title": null,
+      "description": "The server-side Clerk operations used by the adapter. Secrets remain inside this boundary.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/clerk.ts",
+      "sourceLocation": {
+        "filePath": "src/types/clerk.ts",
+        "line": 20,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "ClerkAuthorizationCodeInput",
+        "ClerkAuthorizationStartInput",
+        "ClerkAuthorizationStartResult"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "exchangeAuthorizationCode",
+          "kind": "method",
+          "type": "(input: ClerkAuthorizationCodeInput) => Promise<AuthSession>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "getSession",
+          "kind": "method",
+          "type": "() => Promise<AuthResult<AuthSession | null>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "refreshSession",
+          "kind": "method",
+          "type": "() => Promise<AuthResult<AuthSession | null>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "requestPasswordReset",
+          "kind": "method",
+          "type": "(input: PasswordResetInput) => Promise<AuthResult>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "signIn",
+          "kind": "method",
+          "type": "(input: SignInInput) => Promise<AuthResult<AuthSession>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "signOut",
+          "kind": "method",
+          "type": "(input?: SignOutInput) => Promise<AuthResult>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "signUp",
+          "kind": "method",
+          "type": "(input: SignUpInput) => Promise<AuthResult<AuthSession | AuthUser>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "startAuthorization",
+          "kind": "method",
+          "type": "(input: ClerkAuthorizationStartInput) => Promise<ClerkAuthorizationStartResult>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "verifyOtp",
+          "kind": "method",
+          "type": "(input: VerifyOtpInput) => Promise<AuthResult<AuthSession>>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "createClerkAuthAdapter",
+      "title": null,
+      "description": "Create a framework-neutral Clerk implementation of the Ankhorage authentication port.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 20,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "ClerkAuthConfig"
+      ],
+      "signatures": [
+        {
+          "label": "(config: ClerkAuthConfig) => AuthPort",
+          "parameters": [
+            {
+              "name": "config",
+              "type": "ClerkAuthConfig",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "AuthPort",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    }
+  ],
+  "components": [],
+  "sourceFunctions": [
+    {
+      "name": "createClerkAuthAdapter",
+      "description": "Create a framework-neutral Clerk implementation of the Ankhorage authentication port.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSessionVerifier",
+      "description": "Verify every returned Clerk session before it crosses the provider boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 39,
+        "column": 1
+      }
+    },
+    {
+      "name": "verifyResult",
+      "description": "Normalize verified provider results without leaking provider exceptions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 53,
+        "column": 1
+      }
+    },
+    {
+      "name": "startAuthorization",
+      "description": "Start a single-use Clerk authorization-code attempt with an unguessable state value.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 66,
+        "column": 1
+      }
+    },
+    {
+      "name": "completeAuthorization",
+      "description": "Complete one Clerk code flow, rejecting missing, replayed, malformed, and mismatched callbacks.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 86,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseCallback",
+      "description": "Read only the standardized callback parameters from an authorization redirect.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 124,
+        "column": 1
+      }
+    },
+    {
+      "name": "providerError",
+      "description": "Normalize Clerk operation failures into the released Ankhorage result shape.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 138,
+        "column": 1
+      }
+    },
+    {
+      "name": "oauthStartError",
+      "description": "Produce a released OAuth-start error without exposing sensitive callback data.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 143,
+        "column": 1
+      }
+    },
+    {
+      "name": "oauthCompletionError",
+      "description": "Produce a released OAuth completion failure without exposing sensitive callback data.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 148,
+        "column": 1
+      }
+    },
+    {
+      "name": "oauthError",
+      "description": "Construct a released OAuth error without including raw provider payloads.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 163,
+        "column": 1
+      }
+    },
+    {
+      "name": "createClerkJwtVerifier",
+      "description": "Verify Clerk-issued JWTs through the supported backend SDK verification surface.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "line": 180,
+        "column": 1
+      }
+    }
+  ],
+  "sequenceScenarios": [
+    {
+      "kind": "export",
+      "name": "createClerkAuthAdapter",
+      "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+      "symbolName": "createClerkAuthAdapter",
+      "description": "Create a framework-neutral Clerk implementation of the Ankhorage authentication port.",
+      "isReadme": false
+    }
+  ],
+  "graphs": {
+    "imports": [
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/clerk.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "toPath": "src/types/clerk.ts",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      }
+    ],
+    "calls": [
+      {
+        "fromSymbol": "createClerkAuthAdapter",
+        "toSymbol": "createSessionVerifier",
+        "callExpression": "createSessionVerifier",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "signIn",
+        "toSymbol": "signIn",
+        "callExpression": "config.transport.signIn",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "signUp",
+        "toSymbol": "signUp",
+        "callExpression": "config.transport.signUp",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "signOut",
+        "toSymbol": "signOut",
+        "callExpression": "config.transport.signOut",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "getSession",
+        "toSymbol": "verifyResult",
+        "callExpression": "verifyResult",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "getSession",
+        "toSymbol": "getSession",
+        "callExpression": "config.transport.getSession",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "refreshSession",
+        "toSymbol": "verifyResult",
+        "callExpression": "verifyResult",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "refreshSession",
+        "toSymbol": "refreshSession",
+        "callExpression": "config.transport.refreshSession",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "requestPasswordReset",
+        "toSymbol": "requestPasswordReset",
+        "callExpression": "config.transport.requestPasswordReset",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "verifyOtp",
+        "toSymbol": "verifyResult",
+        "callExpression": "verifyResult",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "verifyOtp",
+        "toSymbol": "verifyOtp",
+        "callExpression": "config.transport.verifyOtp",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "startAuthorization",
+        "toSymbol": "startAuthorization",
+        "callExpression": "startAuthorization",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "completeAuthorization",
+        "callExpression": "completeAuthorization",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "toSymbol": "createClerkJwtVerifier",
+        "callExpression": "createClerkJwtVerifier",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "verifyResult",
+        "toSymbol": "verifySession",
+        "callExpression": "verifySession",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "verifyResult",
+        "toSymbol": "providerError",
+        "callExpression": "providerError",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "startAuthorization",
+        "toSymbol": "__type",
+        "callExpression": "(config.createAttemptId ?? crypto.randomUUID)",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "startAuthorization",
+        "toSymbol": "__type",
+        "callExpression": "(config.createState ?? crypto.randomUUID)",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "startAuthorization",
+        "toSymbol": "startAuthorization",
+        "callExpression": "config.transport.startAuthorization",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "startAuthorization",
+        "toSymbol": "oauthStartError",
+        "callExpression": "oauthStartError",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "oauthCompletionError",
+        "callExpression": "oauthCompletionError",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "parseCallback",
+        "callExpression": "parseCallback",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "exchangeAuthorizationCode",
+        "callExpression": "config.transport.exchangeAuthorizationCode",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "__function",
+        "callExpression": "createSessionVerifier(config)",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "completeAuthorization",
+        "toSymbol": "createSessionVerifier",
+        "callExpression": "createSessionVerifier",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "oauthStartError",
+        "toSymbol": "oauthError",
+        "callExpression": "oauthError",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "oauthCompletionError",
+        "toSymbol": "oauthError",
+        "callExpression": "oauthError",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
+        "toSymbol": "verifyToken",
+        "callExpression": "verifyToken",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      }
+    ],
+    "typeReferences": [
+      {
+        "fromSymbol": "createClerkAuthAdapter",
+        "toType": "AuthPort",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "createClerkAuthAdapter",
+        "toType": "ClerkAuthConfig",
+        "sourcePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"
+      },
+      {
+        "fromSymbol": "ClerkAuthConfig",
+        "toType": "ClerkJwksResolver",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkAuthConfig",
+        "toType": "ClerkJwtVerifier",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkAuthConfig",
+        "toType": "ClerkPublicConfig",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkAuthConfig",
+        "toType": "ClerkTransport",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkJwksResolver",
+        "toType": "JsonWebKey",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkJwtVerificationInput",
+        "toType": "ClerkJwksResolver",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "AuthResult",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "AuthSession",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "AuthUser",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "ClerkAuthorizationCodeInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "ClerkAuthorizationStartInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "ClerkAuthorizationStartResult",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "PasswordResetInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "SignInInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "SignOutInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "SignUpInput",
+        "sourcePath": "src/types/clerk.ts"
+      },
+      {
+        "fromSymbol": "ClerkTransport",
+        "toType": "VerifyOtpInput",
+        "sourcePath": "src/types/clerk.ts"
+      }
+    ],
+    "componentComposition": []
+  }
+}

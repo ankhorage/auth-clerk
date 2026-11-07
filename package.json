@@ -1,0 +1,71 @@
+{
+  "name": "@ankhorage/auth-clerk",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Clerk adapter implementing the provider-neutral Ankhorage auth port.",
+  "homepage": "https://github.com/ankhorage/auth-clerk#readme",
+  "bugs": {
+    "url": "https://github.com/ankhorage/auth-clerk/issues"
+  },
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankhorage/auth-clerk.git"
+  },
+  "keywords": [
+    "adapter",
+    "ankhorage",
+    "auth",
+    "authentication",
+    "clerk",
+    "oauth",
+    "session",
+    "typescript"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist tsconfig.tsbuildinfo && bun x tsc -p tsconfig.json",
+    "changeset": "ankhorage-changeset",
+    "changeset:status": "ankhorage-changeset status --since=origin/main",
+    "docs": "paradox && ankhorage-prettier --write paradox README.md",
+    "lint": "ankhorage-eslint . --max-warnings=0",
+    "lint:fix": "ankhorage-eslint . --fix --max-warnings=0",
+    "format": "ankhorage-prettier --write .",
+    "format:check": "ankhorage-prettier --check .",
+    "prepack": "bun run build",
+    "test": "bun test src",
+    "check-types": "bun x tsc --noEmit -p tsconfig.json",
+    "typecheck": "bun run check-types",
+    "version-packages": "ankhorage-changeset version",
+    "knip:check": "ankhorage-knip"
+  },
+  "devDependencies": {
+    "@ankhorage/devtools": "^2.3.47",
+    "@ankhorage/paradox": "^0.3.6",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.6",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@ankhorage/auth": "^0.1.3",
+    "@ankhorage/contracts": "^26.4.0",
+    "@clerk/backend": "^3.27.0"
+  },
+  "packageManager": "bun@1.4.2"
+}

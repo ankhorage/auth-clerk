@@ -1,0 +1,33 @@
+graph LR
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts["src/features/auth/adapters/clerk/createClerkAuthAdapter.ts"]
+  module_src_index_ts["src/index.ts"]
+  module_src_types_clerk_ts["src/types/clerk.ts"]
+  export_ClerkAuthConfig["ClerkAuthConfig"]
+  module_src_types_clerk_ts --> export_ClerkAuthConfig
+  export_ClerkAuthConfig -.-> export_ClerkJwksResolver
+  export_ClerkAuthConfig -.-> export_ClerkJwtVerifier
+  export_ClerkAuthConfig -.-> export_ClerkPublicConfig
+  export_ClerkAuthConfig -.-> export_ClerkTransport
+  export_ClerkAuthorizationCodeInput["ClerkAuthorizationCodeInput"]
+  module_src_types_clerk_ts --> export_ClerkAuthorizationCodeInput
+  export_ClerkAuthorizationStartInput["ClerkAuthorizationStartInput"]
+  module_src_types_clerk_ts --> export_ClerkAuthorizationStartInput
+  export_ClerkAuthorizationStartResult["ClerkAuthorizationStartResult"]
+  module_src_types_clerk_ts --> export_ClerkAuthorizationStartResult
+  export_ClerkJwksResolver["ClerkJwksResolver"]
+  module_src_types_clerk_ts --> export_ClerkJwksResolver
+  export_ClerkJwtVerificationInput["ClerkJwtVerificationInput"]
+  module_src_types_clerk_ts --> export_ClerkJwtVerificationInput
+  export_ClerkJwtVerificationInput -.-> export_ClerkJwksResolver
+  export_ClerkJwtVerifier["ClerkJwtVerifier"]
+  module_src_types_clerk_ts --> export_ClerkJwtVerifier
+  export_ClerkPublicConfig["ClerkPublicConfig"]
+  module_src_types_clerk_ts --> export_ClerkPublicConfig
+  export_ClerkTransport["ClerkTransport"]
+  module_src_types_clerk_ts --> export_ClerkTransport
+  export_ClerkTransport -.-> export_ClerkAuthorizationCodeInput
+  export_ClerkTransport -.-> export_ClerkAuthorizationStartInput
+  export_ClerkTransport -.-> export_ClerkAuthorizationStartResult
+  export_createClerkAuthAdapter["createClerkAuthAdapter"]
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --> export_createClerkAuthAdapter
+  export_createClerkAuthAdapter -.-> export_ClerkAuthConfig
