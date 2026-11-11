@@ -232,3 +232,81 @@ test('redacts authorization codes, tokens, secrets, and callback URLs from retur
   });
   expect(JSON.stringify({ sessionResult, exchangeResult })).not.toContain(sensitive);
 });
+
+test('verifies sign-in and sign-up sessions before releasing them to consumers', async () => {
+  const verified: string[] = [];
+  const config = createConfig();
+  const adapter = createClerkAuthAdapter(
+    createConfig({
+      verifyJwt: ({ token }) => {
+        verified.push(token);
+        return Promise.resolve();
+      },
+      transport: {
+        ...config.transport,
+        signUp: () => Promise.resolve({ ok: true, data: session }),
+      },
+    }),
+  );
+
+  expect(
+    await adapter.signIn({ identifier: { kind: 'email', value: 'test@example.org' } }),
+  ).toMatchObject({ ok: true, data: session });
+  expect(
+    await adapter.signUp({ identifier: { kind: 'email', value: 'test@example.org' } }),
+  ).toMatchObject({ ok: true, data: session });
+  expect(verified).toEqual(['token', 'token']);
+});
+
+test('rejects unverified sessions from both initial authentication operations', async () => {
+  const config = createConfig();
+  const adapter = createClerkAuthAdapter(
+    createConfig({
+      verifyJwt: () => Promise.reject(new Error('sensitive verifier details')),
+      transport: {
+        ...config.transport,
+        signUp: () => Promise.resolve({ ok: true, data: session }),
+      },
+    }),
+  );
+
+  const signIn = await adapter.signIn({
+    identifier: { kind: 'email', value: 'test@example.org' },
+  });
+  const signUp = await adapter.signUp({
+    identifier: { kind: 'email', value: 'test@example.org' },
+  });
+
+  expect(signIn).toMatchObject({ ok: false, error: { code: 'invalid_session' } });
+  expect(signUp).toMatchObject({ ok: false, error: { code: 'invalid_session' } });
+  expect(JSON.stringify({ signIn, signUp })).not.toContain('sensitive verifier details');
+});
+
+test('redacts transport errors for authentication and lifecycle operations', async () => {
+  const sensitive = 'sk_test_sensitive provider error';
+  const config = createConfig();
+  const adapter = createClerkAuthAdapter(
+    createConfig({
+      transport: {
+        ...config.transport,
+        signIn: () => Promise.reject(new Error(sensitive)),
+        signOut: () =>
+          Promise.resolve({ ok: false, error: { code: 'remote', message: sensitive } }),
+        getSession: () => Promise.reject(new Error(sensitive)),
+        requestPasswordReset: () => Promise.reject(new Error(sensitive)),
+      },
+    }),
+  );
+
+  const input = { identifier: { kind: 'email' as const, value: 'test@example.org' } };
+  const values = [
+    await adapter.signIn(input),
+    await adapter.signOut(),
+    await adapter.getSession(),
+    await adapter.requestPasswordReset(input),
+  ];
+  for (const value of values) {
+    expect(value).toMatchObject({ ok: false, error: { code: 'provider_error' } });
+  }
+  expect(JSON.stringify(values)).not.toContain(sensitive);
+});
