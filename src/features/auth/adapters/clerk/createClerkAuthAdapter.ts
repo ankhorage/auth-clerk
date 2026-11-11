@@ -16,15 +16,21 @@ const DEFAULT_AUTHORIZATION_ATTEMPT_TTL_MS = 10 * 60 * 1000;
 export function createClerkAuthAdapter(config: ClerkAuthConfig): AuthPort {
   const verifySession = createSessionVerifier(config);
   return {
-    signIn: (input) => config.transport.signIn(input),
-    signUp: (input) => config.transport.signUp(input),
-    signOut: (input) => config.transport.signOut(input),
-    getSession: async () => verifyResult(await config.transport.getSession(), verifySession),
+    signIn: async (input) =>
+      verifyResult(await guardedResult(() => config.transport.signIn(input)), verifySession),
+    signUp: async (input) =>
+      verifyResult(await guardedResult(() => config.transport.signUp(input)), async (data) =>
+        'accessToken' in data ? verifySession(data) : data,
+      ),
+    signOut: (input) => guardedResult(() => config.transport.signOut(input)),
+    getSession: async () =>
+      verifyResult(await guardedResult(() => config.transport.getSession()), verifySession),
     refreshSession: async () =>
-      verifyResult(await config.transport.refreshSession(), verifySession),
-    requestPasswordReset: (input) => config.transport.requestPasswordReset(input),
+      verifyResult(await guardedResult(() => config.transport.refreshSession()), verifySession),
+    requestPasswordReset: (input) =>
+      guardedResult(() => config.transport.requestPasswordReset(input)),
     verifyOtp: async (input) =>
-      verifyResult(await config.transport.verifyOtp(input), verifySession),
+      verifyResult(await guardedResult(() => config.transport.verifyOtp(input)), verifySession),
     startAuthorization: async (input) => startAuthorization(config, input),
     completeAuthorization: async (input) => completeAuthorization(config, input),
   };
@@ -44,8 +50,18 @@ function createSessionVerifier(config: ClerkAuthConfig) {
   };
 }
 
+/*** Convert provider transport failures into secret-free portable errors. */
+async function guardedResult<T>(operation: () => Promise<AuthResult<T>>): Promise<AuthResult<T>> {
+  try {
+    const result = await operation();
+    return result.ok ? result : providerError<T>('provider_error', 'Clerk operation failed.');
+  } catch {
+    return providerError<T>('provider_error', 'Clerk operation failed.');
+  }
+}
+
 /*** Normalize verified provider results without leaking provider exceptions. */
-async function verifyResult<T extends AuthSession | null>(
+async function verifyResult<T>(
   result: AuthResult<T>,
   verifySession: (session: T) => Promise<T>,
 ): Promise<AuthResult<T>> {
