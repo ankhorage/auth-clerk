@@ -2,7 +2,7 @@
   {
     "name": "ClerkAuthConfig",
     "title": null,
-    "description": "Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client.",
+    "description": "Configure a Clerk transport adapter with durable OAuth state and JWT verification boundaries.",
     "isReadme": false,
     "see": [],
     "security": [],
@@ -10,13 +10,14 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 65,
+      "line": 86,
       "column": 1
     },
     "exportPaths": [
       "src/index.ts"
     ],
     "relatedSymbols": [
+      "ClerkAuthorizationAttemptStore",
       "ClerkJwksResolver",
       "ClerkJwtVerifier",
       "ClerkPublicConfig",
@@ -24,6 +25,20 @@
     ],
     "signatures": [],
     "members": [
+      {
+        "name": "authorizationAttempts",
+        "kind": "property",
+        "type": "ClerkAuthorizationAttemptStore",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "authorizationAttemptTtlMs",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
       {
         "name": "createAttemptId",
         "kind": "property",
@@ -46,16 +61,16 @@
         "description": null
       },
       {
-        "name": "public",
+        "name": "now",
         "kind": "property",
-        "type": "ClerkPublicConfig",
-        "required": true,
+        "type": "(() => number) | undefined",
+        "required": false,
         "description": null
       },
       {
-        "name": "secretKey",
+        "name": "public",
         "kind": "property",
-        "type": "string",
+        "type": "ClerkPublicConfig",
         "required": true,
         "description": null
       },
@@ -77,6 +92,110 @@
     "structuredRows": []
   },
   {
+    "name": "ClerkAuthorizationAttempt",
+    "title": null,
+    "description": "Define the durable, short-lived state needed to bind an OAuth callback to its authorization.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/clerk.ts",
+    "sourceLocation": {
+      "filePath": "src/types/clerk.ts",
+      "line": 59,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "attemptId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "expiresAt",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "provider",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "redirectUri",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "state",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "ClerkAuthorizationAttemptStore",
+    "title": null,
+    "description": "Persist one OAuth attempt and atomically retire it before any callback is processed.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/clerk.ts",
+    "sourceLocation": {
+      "filePath": "src/types/clerk.ts",
+      "line": 52,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "ClerkAuthorizationAttempt"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "consume",
+        "kind": "method",
+        "type": "(attemptId: string, now: number) => Promise<ClerkAuthorizationAttempt | null>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "create",
+        "kind": "method",
+        "type": "(attempt: ClerkAuthorizationAttempt) => Promise<void>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "purgeExpired",
+        "kind": "method",
+        "type": "(now: number) => Promise<void>",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "ClerkAuthorizationCodeInput",
     "title": null,
     "description": null,
@@ -87,7 +206,7 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 58,
+      "line": 79,
       "column": 1
     },
     "exportPaths": [
@@ -131,7 +250,7 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 46,
+      "line": 67,
       "column": 1
     },
     "exportPaths": [
@@ -189,7 +308,7 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 54,
+      "line": 75,
       "column": 1
     },
     "exportPaths": [
@@ -209,6 +328,162 @@
     "structuredRows": []
   },
   {
+    "name": "ClerkJwk",
+    "title": null,
+    "description": "Represent a Clerk JWKS key, including the identifier used to select it for a JWT.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/clerk.ts",
+    "sourceLocation": {
+      "filePath": "src/types/clerk.ts",
+      "line": 36,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "alg",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "crv",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "d",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "dp",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "dq",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "e",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "ext",
+        "kind": "property",
+        "type": "boolean | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "k",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "key_ops",
+        "kind": "property",
+        "type": "string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "kid",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "kty",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "n",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "oth",
+        "kind": "property",
+        "type": "RsaOtherPrimesInfo[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "p",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "q",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "qi",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "use",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "x",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "y",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "ClerkJwksResolver",
     "title": null,
     "description": null,
@@ -219,19 +494,21 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 35,
+      "line": 40,
       "column": 1
     },
     "exportPaths": [
       "src/index.ts"
     ],
-    "relatedSymbols": [],
+    "relatedSymbols": [
+      "ClerkJwk"
+    ],
     "signatures": [],
     "members": [
       {
         "name": "getJwks",
         "kind": "method",
-        "type": "() => Promise<{ keys: readonly JsonWebKey[]; }>",
+        "type": "() => Promise<{ keys: readonly ClerkJwk[]; }>",
         "required": true,
         "description": null
       }
@@ -249,7 +526,7 @@
     "modulePath": "src/types/clerk.ts",
     "sourceLocation": {
       "filePath": "src/types/clerk.ts",
-      "line": 39,
+      "line": 44,
       "column": 1
     },
     "exportPaths": [
@@ -360,7 +637,7 @@
   {
     "name": "ClerkTransport",
     "title": null,
-    "description": "The server-side Clerk operations used by the adapter. Secrets remain inside this boundary.",
+    "description": "Map the host application's Clerk operations into the provider-neutral auth port.",
     "isReadme": false,
     "see": [],
     "security": [],
@@ -458,7 +735,7 @@
     "modulePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
     "sourceLocation": {
       "filePath": "src/features/auth/adapters/clerk/createClerkAuthAdapter.ts",
-      "line": 20,
+      "line": 16,
       "column": 1
     },
     "exportPaths": [

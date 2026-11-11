@@ -116,7 +116,7 @@
       <aside class="sidebar">
         <p class="muted">Generated with Paradox</p>
         <h1>CLERK AUTH</h1>
-        <p>Clerk adapter implementing the provider-neutral Ankhorage auth port.</p>
+        <p>Clerk transport adapter implementing the provider-neutral Ankhorage auth port.</p>
         <input id="search" class="search" type="search" placeholder="Search current view" />
         <nav aria-label="Documentation sections">
           <ul class="nav-list">
@@ -129,7 +129,12 @@
             <li>
     <button class="nav-button" type="button" data-target="src/features/auth/adapters/clerk/createClerkAuthAdapter.ts">
       src/features/auth/adapters/clerk/createClerkAuthAdapter.ts
-      <small>11 functions</small>
+      <small>14 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/auth/adapters/clerk/createClerkJwtVerifier.ts">
+      src/features/auth/adapters/clerk/createClerkJwtVerifier.ts
+      <small>1 function</small>
     </button>
   </li>
           </ul>
@@ -141,9 +146,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>10</strong><span class="muted">public exports</span></div>
+        <div><strong>13</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>3</strong><span class="muted">modules</span></div>
+        <div><strong>4</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -155,21 +160,26 @@
     <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
     <section class="panel">
       <h2>Modules</h2>
-      <article class="item" data-search="src/features/auth/adapters/clerk/createClerkAuthAdapter.ts src/types/clerk.ts createClerkAuthAdapter">
+      <article class="item" data-search="src/features/auth/adapters/clerk/createClerkAuthAdapter.ts src/features/auth/adapters/clerk/createClerkJwtVerifier.ts src/types/clerk.ts createClerkAuthAdapter">
     <h3>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/clerk.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/auth/adapters/clerk/createClerkJwtVerifier.ts</code>, <code>src/types/clerk.ts</code></p>
     <p><strong>Exports:</strong> <code>createClerkAuthAdapter</code></p>
-  </article><article class="item" data-search="src/index.ts ClerkAuthConfig ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult ClerkJwksResolver ClerkJwtVerificationInput ClerkJwtVerifier ClerkPublicConfig ClerkTransport createClerkAuthAdapter">
+  </article><article class="item" data-search="src/features/auth/adapters/clerk/createClerkJwtVerifier.ts src/types/clerk.ts createClerkJwtVerifier">
+    <h3>src/features/auth/adapters/clerk/createClerkJwtVerifier.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/clerk.ts</code></p>
+    <p><strong>Exports:</strong> <code>createClerkJwtVerifier</code></p>
+  </article><article class="item" data-search="src/index.ts ClerkAuthConfig ClerkAuthorizationAttempt ClerkAuthorizationAttemptStore ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult ClerkJwk ClerkJwksResolver ClerkJwtVerificationInput ClerkJwtVerifier ClerkPublicConfig ClerkTransport createClerkAuthAdapter">
     <h3>src/index.ts</h3>
     <p class="muted">Configured entrypoint</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>ClerkAuthConfig</code>, <code>ClerkAuthorizationCodeInput</code>, <code>ClerkAuthorizationStartInput</code>, <code>ClerkAuthorizationStartResult</code>, <code>ClerkJwksResolver</code>, <code>ClerkJwtVerificationInput</code>, <code>ClerkJwtVerifier</code>, <code>ClerkPublicConfig</code>, <code>ClerkTransport</code>, <code>createClerkAuthAdapter</code></p>
-  </article><article class="item" data-search="src/types/clerk.ts ClerkAuthConfig ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult ClerkJwksResolver ClerkJwtVerificationInput ClerkJwtVerifier ClerkPublicConfig ClerkTransport">
+    <p><strong>Exports:</strong> <code>ClerkAuthConfig</code>, <code>ClerkAuthorizationAttempt</code>, <code>ClerkAuthorizationAttemptStore</code>, <code>ClerkAuthorizationCodeInput</code>, <code>ClerkAuthorizationStartInput</code>, <code>ClerkAuthorizationStartResult</code>, <code>ClerkJwk</code>, <code>ClerkJwksResolver</code>, <code>ClerkJwtVerificationInput</code>, <code>ClerkJwtVerifier</code>, <code>ClerkPublicConfig</code>, <code>ClerkTransport</code>, <code>createClerkAuthAdapter</code></p>
+  </article><article class="item" data-search="src/types/clerk.ts ClerkAuthConfig ClerkAuthorizationAttempt ClerkAuthorizationAttemptStore ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult ClerkJwk ClerkJwksResolver ClerkJwtVerificationInput ClerkJwtVerifier ClerkPublicConfig ClerkTransport">
     <h3>src/types/clerk.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>ClerkAuthConfig</code>, <code>ClerkAuthorizationCodeInput</code>, <code>ClerkAuthorizationStartInput</code>, <code>ClerkAuthorizationStartResult</code>, <code>ClerkJwksResolver</code>, <code>ClerkJwtVerificationInput</code>, <code>ClerkJwtVerifier</code>, <code>ClerkPublicConfig</code>, <code>ClerkTransport</code></p>
+    <p><strong>Exports:</strong> <code>ClerkAuthConfig</code>, <code>ClerkAuthorizationAttempt</code>, <code>ClerkAuthorizationAttemptStore</code>, <code>ClerkAuthorizationCodeInput</code>, <code>ClerkAuthorizationStartInput</code>, <code>ClerkAuthorizationStartResult</code>, <code>ClerkJwk</code>, <code>ClerkJwksResolver</code>, <code>ClerkJwtVerificationInput</code>, <code>ClerkJwtVerifier</code>, <code>ClerkPublicConfig</code>, <code>ClerkTransport</code></p>
   </article>
     </section>
     <section class="panel">
@@ -180,7 +190,7 @@
               <article class="item" id="symbol-createclerkauthadapter" data-search="createClerkAuthAdapter  function src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Create a framework-neutral Clerk implementation of the Ankhorage authentication port. ClerkAuthConfig (config: ClerkAuthConfig) =&gt; AuthPort">
     <h4>createClerkAuthAdapter</h4>
     
-    <p class="muted">function • <code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:20:1</code></p>
+    <p class="muted">function • <code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:16:1</code></p>
     <p>Create a framework-neutral Clerk implementation of the Ankhorage authentication port.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -206,19 +216,31 @@
             </section>
             <section>
               <h3>src/types/clerk.ts</h3>
-              <article class="item" id="symbol-clerkauthconfig" data-search="ClerkAuthConfig  type src/types/clerk.ts Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client. ClerkJwksResolver ClerkJwtVerifier ClerkPublicConfig ClerkTransport">
+              <article class="item" id="symbol-clerkauthconfig" data-search="ClerkAuthConfig  type src/types/clerk.ts Configure a Clerk transport adapter with durable OAuth state and JWT verification boundaries. ClerkAuthorizationAttemptStore ClerkJwksResolver ClerkJwtVerifier ClerkPublicConfig ClerkTransport">
     <h4>ClerkAuthConfig</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:65:1</code></p>
-    <p>Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client.</p>
+    <p class="muted">type • <code>src/types/clerk.ts:86:1</code></p>
+    <p>Configure a Clerk transport adapter with durable OAuth state and JWT verification boundaries.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">ClerkJwksResolver</li><li class="chip">ClerkJwtVerifier</li><li class="chip">ClerkPublicConfig</li><li class="chip">ClerkTransport</li></ul></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">ClerkAuthorizationAttemptStore</li><li class="chip">ClerkJwksResolver</li><li class="chip">ClerkJwtVerifier</li><li class="chip">ClerkPublicConfig</li><li class="chip">ClerkTransport</li></ul></div>
     
     <table>
     <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
     <tbody>
       <tr>
+            <td><code>authorizationAttempts</code></td>
+            <td>property</td>
+            <td><code>ClerkAuthorizationAttemptStore</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>authorizationAttemptTtlMs</code></td>
+            <td>property</td>
+            <td><code>number | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
             <td><code>createAttemptId</code></td>
             <td>property</td>
             <td><code>(() =&gt; string) | undefined</code></td>
@@ -237,15 +259,15 @@
             <td>yes</td>
             <td></td>
           </tr><tr>
+            <td><code>now</code></td>
+            <td>property</td>
+            <td><code>(() =&gt; number) | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
             <td><code>public</code></td>
             <td>property</td>
             <td><code>ClerkPublicConfig</code></td>
-            <td>yes</td>
-            <td></td>
-          </tr><tr>
-            <td><code>secretKey</code></td>
-            <td>property</td>
-            <td><code>string</code></td>
             <td>yes</td>
             <td></td>
           </tr><tr>
@@ -263,10 +285,88 @@
           </tr>
     </tbody>
   </table>
+  </article><article class="item" id="symbol-clerkauthorizationattempt" data-search="ClerkAuthorizationAttempt  type src/types/clerk.ts Define the durable, short-lived state needed to bind an OAuth callback to its authorization.">
+    <h4>ClerkAuthorizationAttempt</h4>
+    
+    <p class="muted">type • <code>src/types/clerk.ts:59:1</code></p>
+    <p>Define the durable, short-lived state needed to bind an OAuth callback to its authorization.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>attemptId</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>expiresAt</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>provider</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>redirectUri</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>state</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-clerkauthorizationattemptstore" data-search="ClerkAuthorizationAttemptStore  type src/types/clerk.ts Persist one OAuth attempt and atomically retire it before any callback is processed. ClerkAuthorizationAttempt">
+    <h4>ClerkAuthorizationAttemptStore</h4>
+    
+    <p class="muted">type • <code>src/types/clerk.ts:52:1</code></p>
+    <p>Persist one OAuth attempt and atomically retire it before any callback is processed.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">ClerkAuthorizationAttempt</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>consume</code></td>
+            <td>method</td>
+            <td><code>(attemptId: string, now: number) =&gt; Promise&lt;ClerkAuthorizationAttempt | null&gt;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>create</code></td>
+            <td>method</td>
+            <td><code>(attempt: ClerkAuthorizationAttempt) =&gt; Promise&lt;void&gt;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>purgeExpired</code></td>
+            <td>method</td>
+            <td><code>(now: number) =&gt; Promise&lt;void&gt;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
   </article><article class="item" id="symbol-clerkauthorizationcodeinput" data-search="ClerkAuthorizationCodeInput  type src/types/clerk.ts ">
     <h4>ClerkAuthorizationCodeInput</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:58:1</code></p>
+    <p class="muted">type • <code>src/types/clerk.ts:79:1</code></p>
     
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -299,7 +399,7 @@
   </article><article class="item" id="symbol-clerkauthorizationstartinput" data-search="ClerkAuthorizationStartInput  type src/types/clerk.ts ">
     <h4>ClerkAuthorizationStartInput</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:46:1</code></p>
+    <p class="muted">type • <code>src/types/clerk.ts:67:1</code></p>
     
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -344,7 +444,7 @@
   </article><article class="item" id="symbol-clerkauthorizationstartresult" data-search="ClerkAuthorizationStartResult  type src/types/clerk.ts ">
     <h4>ClerkAuthorizationStartResult</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:54:1</code></p>
+    <p class="muted">type • <code>src/types/clerk.ts:75:1</code></p>
     
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -362,11 +462,11 @@
           </tr>
     </tbody>
   </table>
-  </article><article class="item" id="symbol-clerkjwksresolver" data-search="ClerkJwksResolver  type src/types/clerk.ts ">
-    <h4>ClerkJwksResolver</h4>
+  </article><article class="item" id="symbol-clerkjwk" data-search="ClerkJwk  type src/types/clerk.ts Represent a Clerk JWKS key, including the identifier used to select it for a JWT.">
+    <h4>ClerkJwk</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:35:1</code></p>
-    
+    <p class="muted">type • <code>src/types/clerk.ts:36:1</code></p>
+    <p>Represent a Clerk JWKS key, including the identifier used to select it for a JWT.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
@@ -375,9 +475,138 @@
     <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
     <tbody>
       <tr>
+            <td><code>alg</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>crv</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>d</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>dp</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>dq</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>e</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>ext</code></td>
+            <td>property</td>
+            <td><code>boolean | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>k</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>key_ops</code></td>
+            <td>property</td>
+            <td><code>string[] | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>kid</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>kty</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>n</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>oth</code></td>
+            <td>property</td>
+            <td><code>RsaOtherPrimesInfo[] | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>p</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>q</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>qi</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>use</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>x</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>y</code></td>
+            <td>property</td>
+            <td><code>string | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-clerkjwksresolver" data-search="ClerkJwksResolver  type src/types/clerk.ts  ClerkJwk">
+    <h4>ClerkJwksResolver</h4>
+    
+    <p class="muted">type • <code>src/types/clerk.ts:40:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">ClerkJwk</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
             <td><code>getJwks</code></td>
             <td>method</td>
-            <td><code>() =&gt; Promise&lt;{ keys: readonly JsonWebKey[]; }&gt;</code></td>
+            <td><code>() =&gt; Promise&lt;{ keys: readonly ClerkJwk[]; }&gt;</code></td>
             <td>yes</td>
             <td></td>
           </tr>
@@ -386,7 +615,7 @@
   </article><article class="item" id="symbol-clerkjwtverificationinput" data-search="ClerkJwtVerificationInput  type src/types/clerk.ts  ClerkJwksResolver">
     <h4>ClerkJwtVerificationInput</h4>
     
-    <p class="muted">type • <code>src/types/clerk.ts:39:1</code></p>
+    <p class="muted">type • <code>src/types/clerk.ts:44:1</code></p>
     
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -465,11 +694,11 @@
           </tr>
     </tbody>
   </table>
-  </article><article class="item" id="symbol-clerktransport" data-search="ClerkTransport  type src/types/clerk.ts The server-side Clerk operations used by the adapter. Secrets remain inside this boundary. ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult">
+  </article><article class="item" id="symbol-clerktransport" data-search="ClerkTransport  type src/types/clerk.ts Map the host application&#39;s Clerk operations into the provider-neutral auth port. ClerkAuthorizationCodeInput ClerkAuthorizationStartInput ClerkAuthorizationStartResult">
     <h4>ClerkTransport</h4>
     
     <p class="muted">type • <code>src/types/clerk.ts:20:1</code></p>
-    <p>The server-side Clerk operations used by the adapter. Secrets remain inside this boundary.</p>
+    <p>Map the host application&#39;s Clerk operations into the provider-neutral auth port.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">ClerkAuthorizationCodeInput</li><li class="chip">ClerkAuthorizationStartInput</li><li class="chip">ClerkAuthorizationStartResult</li></ul></div>
@@ -552,7 +781,11 @@
   package__ankhorage_auth_clerk --&gt; entrypoint_src_index_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
   package__ankhorage_auth_clerk -.-&gt; module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_types_clerk_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
+  package__ankhorage_auth_clerk -.-&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts --&gt; module_src_types_clerk_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
   package__ankhorage_auth_clerk -.-&gt; module_src_types_clerk_ts
@@ -565,7 +798,11 @@
   package__ankhorage_auth_clerk --&gt; entrypoint_src_index_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
   package__ankhorage_auth_clerk -.-&gt; module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_types_clerk_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
+  package__ankhorage_auth_clerk -.-&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts --&gt; module_src_types_clerk_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
   package__ankhorage_auth_clerk -.-&gt; module_src_types_clerk_ts
@@ -576,17 +813,23 @@
     <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
     <div class="mermaid">graph LR
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_types_clerk_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts --&gt; module_src_types_clerk_ts
 </div>
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts --&gt; module_src_types_clerk_ts
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts --&gt; module_src_types_clerk_ts
 </pre>
     </details>
   </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
@@ -594,22 +837,32 @@
     <p class="muted"><code>diagrams/export-graph.mmd</code></p>
     <div class="mermaid">graph LR
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
   export_ClerkAuthConfig[&quot;ClerkAuthConfig&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthConfig
+  export_ClerkAuthConfig -.-&gt; export_ClerkAuthorizationAttemptStore
   export_ClerkAuthConfig -.-&gt; export_ClerkJwksResolver
   export_ClerkAuthConfig -.-&gt; export_ClerkJwtVerifier
   export_ClerkAuthConfig -.-&gt; export_ClerkPublicConfig
   export_ClerkAuthConfig -.-&gt; export_ClerkTransport
+  export_ClerkAuthorizationAttempt[&quot;ClerkAuthorizationAttempt&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkAuthorizationAttempt
+  export_ClerkAuthorizationAttemptStore[&quot;ClerkAuthorizationAttemptStore&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkAuthorizationAttemptStore
+  export_ClerkAuthorizationAttemptStore -.-&gt; export_ClerkAuthorizationAttempt
   export_ClerkAuthorizationCodeInput[&quot;ClerkAuthorizationCodeInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationCodeInput
   export_ClerkAuthorizationStartInput[&quot;ClerkAuthorizationStartInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationStartInput
   export_ClerkAuthorizationStartResult[&quot;ClerkAuthorizationStartResult&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationStartResult
+  export_ClerkJwk[&quot;ClerkJwk&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkJwk
   export_ClerkJwksResolver[&quot;ClerkJwksResolver&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkJwksResolver
+  export_ClerkJwksResolver -.-&gt; export_ClerkJwk
   export_ClerkJwtVerificationInput[&quot;ClerkJwtVerificationInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkJwtVerificationInput
   export_ClerkJwtVerificationInput -.-&gt; export_ClerkJwksResolver
@@ -630,22 +883,32 @@
       <summary>View Mermaid source</summary>
       <pre>graph LR
   module_src_features_auth_adapters_clerk_createClerkAuthAdapter_ts[&quot;src/features/auth/adapters/clerk/createClerkAuthAdapter.ts&quot;]
+  module_src_features_auth_adapters_clerk_createClerkJwtVerifier_ts[&quot;src/features/auth/adapters/clerk/createClerkJwtVerifier.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_clerk_ts[&quot;src/types/clerk.ts&quot;]
   export_ClerkAuthConfig[&quot;ClerkAuthConfig&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthConfig
+  export_ClerkAuthConfig -.-&gt; export_ClerkAuthorizationAttemptStore
   export_ClerkAuthConfig -.-&gt; export_ClerkJwksResolver
   export_ClerkAuthConfig -.-&gt; export_ClerkJwtVerifier
   export_ClerkAuthConfig -.-&gt; export_ClerkPublicConfig
   export_ClerkAuthConfig -.-&gt; export_ClerkTransport
+  export_ClerkAuthorizationAttempt[&quot;ClerkAuthorizationAttempt&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkAuthorizationAttempt
+  export_ClerkAuthorizationAttemptStore[&quot;ClerkAuthorizationAttemptStore&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkAuthorizationAttemptStore
+  export_ClerkAuthorizationAttemptStore -.-&gt; export_ClerkAuthorizationAttempt
   export_ClerkAuthorizationCodeInput[&quot;ClerkAuthorizationCodeInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationCodeInput
   export_ClerkAuthorizationStartInput[&quot;ClerkAuthorizationStartInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationStartInput
   export_ClerkAuthorizationStartResult[&quot;ClerkAuthorizationStartResult&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkAuthorizationStartResult
+  export_ClerkJwk[&quot;ClerkJwk&quot;]
+  module_src_types_clerk_ts --&gt; export_ClerkJwk
   export_ClerkJwksResolver[&quot;ClerkJwksResolver&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkJwksResolver
+  export_ClerkJwksResolver -.-&gt; export_ClerkJwk
   export_ClerkJwtVerificationInput[&quot;ClerkJwtVerificationInput&quot;]
   module_src_types_clerk_ts --&gt; export_ClerkJwtVerificationInput
   export_ClerkJwtVerificationInput -.-&gt; export_ClerkJwksResolver
@@ -689,58 +952,83 @@
       <h2>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts</h2>
       <article class="item" data-search="createClerkAuthAdapter src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Create a framework-neutral Clerk implementation of the Ankhorage authentication port.">
     <h3>createClerkAuthAdapter</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:20:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:16:1</code></p>
     <p>Create a framework-neutral Clerk implementation of the Ankhorage authentication port.</p>
     
   </article><article class="item" data-search="createSessionVerifier src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Verify every returned Clerk session before it crosses the provider boundary.">
     <h3>createSessionVerifier</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:39:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:40:1</code></p>
     <p>Verify every returned Clerk session before it crosses the provider boundary.</p>
+    
+  </article><article class="item" data-search="guardedResult src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Convert provider transport failures into secret-free portable errors.">
+    <h3>guardedResult</h3>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:54:1</code></p>
+    <p>Convert provider transport failures into secret-free portable errors.</p>
     
   </article><article class="item" data-search="verifyResult src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Normalize verified provider results without leaking provider exceptions.">
     <h3>verifyResult</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:53:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:64:1</code></p>
     <p>Normalize verified provider results without leaking provider exceptions.</p>
     
   </article><article class="item" data-search="startAuthorization src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Start a single-use Clerk authorization-code attempt with an unguessable state value.">
     <h3>startAuthorization</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:66:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:77:1</code></p>
     <p>Start a single-use Clerk authorization-code attempt with an unguessable state value.</p>
     
   </article><article class="item" data-search="completeAuthorization src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Complete one Clerk code flow, rejecting missing, replayed, malformed, and mismatched callbacks.">
     <h3>completeAuthorization</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:86:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:104:1</code></p>
     <p>Complete one Clerk code flow, rejecting missing, replayed, malformed, and mismatched callbacks.</p>
     
   </article><article class="item" data-search="parseCallback src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Read only the standardized callback parameters from an authorization redirect.">
     <h3>parseCallback</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:124:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:146:1</code></p>
     <p>Read only the standardized callback parameters from an authorization redirect.</p>
+    
+  </article><article class="item" data-search="hasExpectedRedirectUri src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Require the callback to return to the redirect URI that started this authorization attempt.">
+    <h3>hasExpectedRedirectUri</h3>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:162:1</code></p>
+    <p>Require the callback to return to the redirect URI that started this authorization attempt.</p>
+    
+  </article><article class="item" data-search="consumeAuthorizationAttempt src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Atomically consume an unexpired OAuth attempt while keeping store failures unobservable.">
+    <h3>consumeAuthorizationAttempt</h3>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:172:1</code></p>
+    <p>Atomically consume an unexpired OAuth attempt while keeping store failures unobservable.</p>
+    
+  </article><article class="item" data-search="getNow src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Obtain the adapter clock so expiry decisions stay deterministic in tests and explicit in hosts.">
+    <h3>getNow</h3>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:181:1</code></p>
+    <p>Obtain the adapter clock so expiry decisions stay deterministic in tests and explicit in hosts.</p>
     
   </article><article class="item" data-search="providerError src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Normalize Clerk operation failures into the released Ankhorage result shape.">
     <h3>providerError</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:138:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:186:1</code></p>
     <p>Normalize Clerk operation failures into the released Ankhorage result shape.</p>
     
   </article><article class="item" data-search="oauthStartError src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Produce a released OAuth-start error without exposing sensitive callback data.">
     <h3>oauthStartError</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:143:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:191:1</code></p>
     <p>Produce a released OAuth-start error without exposing sensitive callback data.</p>
     
   </article><article class="item" data-search="oauthCompletionError src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Produce a released OAuth completion failure without exposing sensitive callback data.">
     <h3>oauthCompletionError</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:148:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:196:1</code></p>
     <p>Produce a released OAuth completion failure without exposing sensitive callback data.</p>
     
   </article><article class="item" data-search="oauthError src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Construct a released OAuth error without including raw provider payloads.">
     <h3>oauthError</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:163:1</code></p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:210:1</code></p>
     <p>Construct a released OAuth error without including raw provider payloads.</p>
     
-  </article><article class="item" data-search="createClerkJwtVerifier src/features/auth/adapters/clerk/createClerkAuthAdapter.ts Verify Clerk-issued JWTs through the supported backend SDK verification surface.">
+  </article>
+    </section>
+  </section><section id="view-src-features-auth-adapters-clerk-createclerkjwtverifier-ts" class="view" data-view="src/features/auth/adapters/clerk/createClerkJwtVerifier.ts" hidden>
+    <section class="panel">
+      <h2>src/features/auth/adapters/clerk/createClerkJwtVerifier.ts</h2>
+      <article class="item" data-search="createClerkJwtVerifier src/features/auth/adapters/clerk/createClerkJwtVerifier.ts Create the default Clerk JWT verifier from the explicitly configured JWKS boundary.">
     <h3>createClerkJwtVerifier</h3>
-    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:180:1</code></p>
-    <p>Verify Clerk-issued JWTs through the supported backend SDK verification surface.</p>
+    <p class="muted"><code>src/features/auth/adapters/clerk/createClerkJwtVerifier.ts:6:1</code></p>
+    <p>Create the default Clerk JWT verifier from the explicitly configured JWKS boundary.</p>
     
   </article>
     </section>

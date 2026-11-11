@@ -4,27 +4,63 @@
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:65:1`
+Source: `src/types/clerk.ts:86:1`
 
-Server-only configuration for a Clerk adapter. Never expose `secretKey` to a client.
+Configure a Clerk transport adapter with durable OAuth state and JWT verification boundaries.
 
 ### Members
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
+| authorizationAttempts | property | `ClerkAuthorizationAttemptStore` | yes |  |
+| authorizationAttemptTtlMs | property | `number \| undefined` | no |  |
 | createAttemptId | property | `(() => string) \| undefined` | no |  |
 | createState | property | `(() => string) \| undefined` | no |  |
 | jwks | property | `ClerkJwksResolver` | yes |  |
+| now | property | `(() => number) \| undefined` | no |  |
 | public | property | `ClerkPublicConfig` | yes |  |
-| secretKey | property | `string` | yes |  |
 | transport | property | `ClerkTransport` | yes |  |
 | verifyJwt | property | `ClerkJwtVerifier \| undefined` | no |  |
+
+## ClerkAuthorizationAttempt
+
+Kind: `type`
+Module: `src/types/clerk.ts`
+Source: `src/types/clerk.ts:59:1`
+
+Define the durable, short-lived state needed to bind an OAuth callback to its authorization.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| attemptId | property | `string` | yes |  |
+| expiresAt | property | `number` | yes |  |
+| provider | property | `string` | yes |  |
+| redirectUri | property | `string` | yes |  |
+| state | property | `string` | yes |  |
+
+## ClerkAuthorizationAttemptStore
+
+Kind: `type`
+Module: `src/types/clerk.ts`
+Source: `src/types/clerk.ts:52:1`
+
+Persist one OAuth attempt and atomically retire it before any callback is processed.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| consume | method | `(attemptId: string, now: number) => Promise<ClerkAuthorizationAttempt \| null>` | yes |  |
+| create | method | `(attempt: ClerkAuthorizationAttempt) => Promise<void>` | yes |  |
+| purgeExpired | method | `(now: number) => Promise<void>` | yes |  |
 
 ## ClerkAuthorizationCodeInput
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:58:1`
+Source: `src/types/clerk.ts:79:1`
 
 ### Members
 
@@ -38,7 +74,7 @@ Source: `src/types/clerk.ts:58:1`
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:46:1`
+Source: `src/types/clerk.ts:67:1`
 
 ### Members
 
@@ -54,7 +90,7 @@ Source: `src/types/clerk.ts:46:1`
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:54:1`
+Source: `src/types/clerk.ts:75:1`
 
 ### Members
 
@@ -62,23 +98,55 @@ Source: `src/types/clerk.ts:54:1`
 | --- | --- | --- | --- | --- |
 | authorizationUrl | property | `string` | yes |  |
 
-## ClerkJwksResolver
+## ClerkJwk
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:35:1`
+Source: `src/types/clerk.ts:36:1`
+
+Represent a Clerk JWKS key, including the identifier used to select it for a JWT.
 
 ### Members
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| getJwks | method | `() => Promise<{ keys: readonly JsonWebKey[]; }>` | yes |  |
+| alg | property | `string \| undefined` | no |  |
+| crv | property | `string \| undefined` | no |  |
+| d | property | `string \| undefined` | no |  |
+| dp | property | `string \| undefined` | no |  |
+| dq | property | `string \| undefined` | no |  |
+| e | property | `string \| undefined` | no |  |
+| ext | property | `boolean \| undefined` | no |  |
+| k | property | `string \| undefined` | no |  |
+| key_ops | property | `string[] \| undefined` | no |  |
+| kid | property | `string \| undefined` | no |  |
+| kty | property | `string \| undefined` | no |  |
+| n | property | `string \| undefined` | no |  |
+| oth | property | `RsaOtherPrimesInfo[] \| undefined` | no |  |
+| p | property | `string \| undefined` | no |  |
+| q | property | `string \| undefined` | no |  |
+| qi | property | `string \| undefined` | no |  |
+| use | property | `string \| undefined` | no |  |
+| x | property | `string \| undefined` | no |  |
+| y | property | `string \| undefined` | no |  |
+
+## ClerkJwksResolver
+
+Kind: `type`
+Module: `src/types/clerk.ts`
+Source: `src/types/clerk.ts:40:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| getJwks | method | `() => Promise<{ keys: readonly ClerkJwk[]; }>` | yes |  |
 
 ## ClerkJwtVerificationInput
 
 Kind: `type`
 Module: `src/types/clerk.ts`
-Source: `src/types/clerk.ts:39:1`
+Source: `src/types/clerk.ts:44:1`
 
 ### Members
 
@@ -119,7 +187,7 @@ Kind: `type`
 Module: `src/types/clerk.ts`
 Source: `src/types/clerk.ts:20:1`
 
-The server-side Clerk operations used by the adapter. Secrets remain inside this boundary.
+Map the host application's Clerk operations into the provider-neutral auth port.
 
 ### Members
 
@@ -139,7 +207,7 @@ The server-side Clerk operations used by the adapter. Secrets remain inside this
 
 Kind: `function`
 Module: `src/features/auth/adapters/clerk/createClerkAuthAdapter.ts`
-Source: `src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:20:1`
+Source: `src/features/auth/adapters/clerk/createClerkAuthAdapter.ts:16:1`
 
 Create a framework-neutral Clerk implementation of the Ankhorage authentication port.
 
