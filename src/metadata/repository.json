@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "kind": "adapter",
+  "title": "Ankhorage Clerk Auth Adapter",
+  "summary": "Clerk transport adapter implementing the provider-neutral Ankhorage authentication port.",
+  "purpose": "Use Clerk for authentication while preserving the portable Ankhorage auth contract, verified sessions, single-use authorization attempts, and provider-neutral failure shapes.",
+  "domain": "authentication provider integration",
+  "responsibilities": [
+    "Implement sign-in, sign-up, sign-out, session, refresh, password reset, and OTP operations through a supplied Clerk transport.",
+    "Verify Clerk session tokens before returning portable sessions.",
+    "Start and complete authorization-code flows with expiring single-use state records.",
+    "Normalize provider failures without leaking secrets or raw callback payloads."
+  ],
+  "boundaries": [
+    "Does not own the provider-neutral auth contract.",
+    "Does not persist authorization attempts except through a host-supplied store.",
+    "Does not expose Clerk SDK objects or provider exceptions through the public auth result."
+  ],
+  "audience": [
+    "Applications selecting Clerk behind the Ankhorage auth port.",
+    "Hosts supplying Clerk transport, JWKS, authorization-attempt storage, and public provider configuration."
+  ],
+  "useCases": [
+    "Authenticate or refresh a user session through Clerk.",
+    "Verify a returned Clerk access token before accepting the session.",
+    "Complete an OAuth authorization callback while rejecting replay, expiry, redirect, and state mismatches."
+  ],
+  "architecture": {
+    "role": "Provider adapter that maps Clerk transport behavior onto the published AuthPort and portable auth contracts.",
+    "invariants": [
+      "Every non-null session is JWT-verified before crossing the adapter boundary.",
+      "Authorization attempts are expiring and atomically consumed exactly once.",
+      "Provider failures are converted to secret-free portable errors."
+    ]
+  },
+  "implements": [
+    {
+      "packageName": "@ankhorage/auth",
+      "interfaceId": "AuthPort"
+    }
+  ],
+  "constraints": {
+    "configuration": [
+      "Requires Clerk issuer, audience, JWKS, transport, and authorization-attempt storage supplied by the host."
+    ],
+    "security": [
+      "Session JWTs are verified; OAuth state, redirect URI, expiry, and replay are checked before code exchange."
+    ]
+  }
+}
